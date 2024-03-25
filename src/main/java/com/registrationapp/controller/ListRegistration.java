@@ -1,6 +1,7 @@
 package com.registrationapp.controller;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,30 +12,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.registrationapp.model.DAOServiceImpl;
 
-@WebServlet("/addReg")
-public class AddRegistrationController extends HttpServlet {
+@WebServlet("/listRegistration")
+public class ListRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AddRegistrationController() {
+    public ListRegistration() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/add-registration.jsp");
+		DAOServiceImpl service = new DAOServiceImpl();
+		service.connectDB();
+		ResultSet result = service.listRegistration();
+		request.setAttribute("result", result);
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/list-registration.jsp");
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String course = request.getParameter("course");
-		String mobile = request.getParameter("mobile");
-		
-		DAOServiceImpl service = new DAOServiceImpl();
-		service.connectDB();
-		service.addRegistration(name, email, course, mobile);
-		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/add-registration.jsp");
-		rd.forward(request, response);
 	}
 
 }

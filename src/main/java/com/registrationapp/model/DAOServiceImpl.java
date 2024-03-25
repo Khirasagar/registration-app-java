@@ -61,4 +61,15 @@ public class DAOServiceImpl implements DAOService {
 
 	}
 
+	@Override
+	public ResultSet listRegistration() {
+	try {	
+		ResultSet result = stmnt .executeQuery("SELECT * FROM registration");
+		return result;
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+		return null;
+	}
+
 }
