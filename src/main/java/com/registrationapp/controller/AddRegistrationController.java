@@ -11,32 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.registrationapp.model.DAOServiceImpl;
 
-@WebServlet("/verifyLogin")
-public class LoginController extends HttpServlet {
+@WebServlet("/addReg")
+public class AddRegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public LoginController() {
+       
+    public AddRegistrationController() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
 		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+		String course = request.getParameter("course");
+		String mobile = request.getParameter("mobile");
+		
 		DAOServiceImpl service = new DAOServiceImpl();
 		service.connectDB();
-		boolean status = service.verifyLogin(email, password);
-		if(status) {
-			RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/add-registration.jsp");
-			rd.forward(request, response);
-		}else {
-			request.setAttribute("error","Invalid username/password");
-			RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-			rd.forward(request, response);
-			
-		}
-		
+		service.addRegistration(name, email, course, mobile);
+		RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/add-registration.jsp");
+		rd.forward(request, response);
 	}
 
 }

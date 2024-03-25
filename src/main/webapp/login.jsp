@@ -8,6 +8,13 @@
 </head>
 <body>
 	<h2>Login here...</h2>
+	<div>
+		<%
+			if(request.getAttribute("error")!=null){
+				out.println(request.getAttribute("error"));
+			}
+		%>
+	</div>
 	<form action="verifyLogin" method="post">
 		Email : <input type="email" name="email"/>
 		Password : <input type="password" name="password"/>

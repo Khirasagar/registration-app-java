@@ -30,9 +30,16 @@ public class DAOServiceImpl implements DAOService {
 		return false;
 	}
 
+	/**
+	 *
+	 */
 	@Override
-	public void addRegistration(String name, String course, String email, String mobile) {
-		// TODO Auto-generated method stub
+	public void addRegistration(String name, String email, String course, String mobile) {
+		try {
+			stmnt .executeUpdate(" insert into registration values('"+name+"','"+email+"','"+course+"','"+mobile+"') ");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
