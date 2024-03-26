@@ -36,7 +36,7 @@ public class DAOServiceImpl implements DAOService {
 	@Override
 	public void addRegistration(String name, String email, String course, String mobile) {
 		try {
-			stmnt .executeUpdate(" insert into registration values('"+name+"','"+email+"','"+course+"','"+mobile+"') ");
+			stmnt .executeUpdate(" insert into registration (name,email,course,mobile) values('"+name+"','"+email+"','"+course+"','"+mobile+"') ");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,14 +45,22 @@ public class DAOServiceImpl implements DAOService {
 
 	@Override
 	public void deleteRegistration(String email) {
-		// TODO Auto-generated method stub
+		try {
+			stmnt.executeUpdate(" DELETE FROM registration WHERE email= '"+email+"' ");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 
 	}
 
 	@Override
 	public void updateRegistration(String mobile, String email) {
-		// TODO Auto-generated method stub
-
+		try {
+			stmnt.executeUpdate("UPDATE registration SET mobile='"+mobile+"' WHERE email='"+email+"'  ");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
