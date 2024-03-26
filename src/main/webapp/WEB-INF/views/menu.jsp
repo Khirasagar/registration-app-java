@@ -9,6 +9,9 @@
 <body>
 		<a href="addReg">add registration</a>
 		<a href="listRegistration">list registration</a>
+		<form action="logOut" method="post">
+			<input type="submit" value="logout"/>
+		</form>
 
 </body>
 </html>
